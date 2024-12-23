@@ -1,3 +1,4 @@
+import 'package:chat_app/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
-            color: Color(0xff2B475E),
+            color: kPrimaryColor,
           ),
         ),
       ),

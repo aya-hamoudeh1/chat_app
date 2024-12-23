@@ -16,7 +16,7 @@ class ScholarChat extends StatelessWidget {
       theme: ThemeData.dark(),
       routes: {
         "LoginPage": (context) => const LoginPage(),
-        "RegisterPage": (context) => const RegisterPage()
+       RegisterPage.id: (context) => const RegisterPage()
       },
       initialRoute: "LoginPage",
     );

@@ -1,3 +1,5 @@
+import 'package:chat_app/constants.dart';
+import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff2B475E),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
@@ -66,7 +68,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, "RegisterPage");
+                    Navigator.pushNamed(context, RegisterPage.id);
                   },
                   child: const Text(
                     " REGISTER",
