@@ -58,16 +58,21 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "already have an account !  ",
+                const Text(
+                  "already have an account ?  ",
                 ),
-                Text(
-                  " LOGIN",
-                  style: TextStyle(
-                    color: Color(0xffC7EDE6),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    " LOGIN",
+                    style: TextStyle(
+                      color: Color(0xffC7EDE6),
+                    ),
                   ),
                 ),
               ],
