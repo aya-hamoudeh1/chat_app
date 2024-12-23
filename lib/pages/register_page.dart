@@ -1,10 +1,9 @@
-import 'package:chat_app/pages/register_page.dart';
-import 'package:chat_app/widgets/custom_button.dart';
-import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text_field.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class LoginPage extends StatelessWidget {
             const Row(
               children: [
                 Text(
-                  "LOGIN",
+                  "REGISTER",
                   style: TextStyle(
                     fontSize: 24,
                   ),
@@ -54,31 +53,21 @@ class LoginPage extends StatelessWidget {
               height: 20,
             ),
             const CustomButton(
-              title: "LOGIN",
+              title: "REGISTER",
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "don't have an account ?  ",
+                Text(
+                  "already have an account !  ",
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegisterPage(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    " REGISTER",
-                    style: TextStyle(
-                      color: Color(0xffC7EDE6),
-                    ),
+                Text(
+                  " LOGIN",
+                  style: TextStyle(
+                    color: Color(0xffC7EDE6),
                   ),
                 ),
               ],
