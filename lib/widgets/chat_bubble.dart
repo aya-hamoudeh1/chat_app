@@ -1,10 +1,14 @@
+import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
+    required this.message,
     super.key,
   });
+
+  final Message message;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,8 @@ class ChatBubble extends StatelessWidget {
           ),
           color: kPrimaryColor,
         ),
-        child: const Text(
-          "I am a new user",
+        child: Text(
+          message.message,
         ),
       ),
     );
