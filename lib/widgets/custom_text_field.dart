@@ -7,7 +7,12 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if(value!.isEmpty){
+          return "field is required";
+        }
+      },
       onChanged: onChange,
       decoration: InputDecoration(
         hintText: hintText,

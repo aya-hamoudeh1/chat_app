@@ -10,100 +10,120 @@ class RegisterPage extends StatelessWidget {
   static String id = "RegisterPage";
 
   String? email, password;
+
+  GlobalKey<FormState> formKey =GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            const Spacer(
-              flex: 2,
-            ),
-            Image.asset("assets/Images/scholar.png"),
-            const Text(
-              "Scholar Chat",
-              style: TextStyle(
-                fontSize: 32,
-                fontFamily: "pacifico",
+        child: Form(
+          key: formKey,
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 75,
               ),
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            const Row(
-              children: [
-                Text(
-                  "REGISTER",
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              onChange: (p0) {
-                email = p0;
-              },
-              hintText: "Email",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomTextField(
-              onChange: (p0) {
-                password = p0;
-              },
-              hintText: "Password",
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomButton(
-              onTap: () async {
-                try {
-                  await registerUser();
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'weak-password') {
-                    showSnackBar(context, "weak password");
-                  } else if (e.code == 'email-already-in-use') {
-                    showSnackBar(context, "email already exists");
-                  }
-                }
-                showSnackBar(context, "Success");
-              },
-              title: "REGISTER",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "already have an account ?  ",
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    " LOGIN",
+              Image.asset(
+                "assets/Images/scholar.png",
+                height: 100,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Scholar Chat",
                     style: TextStyle(
-                      color: Color(0xffC7EDE6),
+                      fontSize: 32,
+                      fontFamily: "pacifico",
                     ),
                   ),
-                ),
-              ],
-            ),
-            const Spacer(
-              flex: 3,
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(
+                height: 75,
+              ),
+              const Row(
+                children: [
+                  Text(
+                    "REGISTER",
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextField(
+                onChange: (p0) {
+                  email = p0;
+                },
+                hintText: "Email",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomTextField(
+                onChange: (p0) {
+                  password = p0;
+                },
+                hintText: "Password",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomButton(
+                onTap: () async {
+                  if(formKey.currentState!.validate()) {
+                    try {
+                      await registerUser();
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        showSnackBar(context, "weak password");
+                      } else if (e.code == 'email-already-in-use') {
+                        showSnackBar(context, "email already exists");
+                      }
+                    } catch (e) {
+                      showSnackBar(context, "there was an error");
+                    }
+                    showSnackBar(context, "Success");
+                  } else {
+
+                  }
+                },
+                title: "REGISTER",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "already have an account ?  ",
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      " LOGIN",
+                      style: TextStyle(
+                        color: Color(0xffC7EDE6),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(
+                flex: 3,
+              ),
+            ],
+          ),
         ),
       ),
     );
