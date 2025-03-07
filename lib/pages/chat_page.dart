@@ -16,8 +16,8 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: messages.get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: messages.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -51,7 +51,7 @@ class ChatPage extends StatelessWidget {
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
                       return ChatBubble(
-                        message: messagesList[index],
+                        messageModel: messagesList[index],
                       );
                     },
                   ),

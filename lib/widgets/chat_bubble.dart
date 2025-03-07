@@ -4,11 +4,11 @@ import '../constants.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
-    required this.message,
+    required this.messageModel,
     super.key,
   });
 
-  final Message message;
+  final Message messageModel;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ChatBubble extends StatelessWidget {
           color: kPrimaryColor,
         ),
         child: Text(
-          message.message,
+          messageModel.message,
         ),
       ),
     );
