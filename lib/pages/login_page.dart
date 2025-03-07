@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
@@ -9,6 +10,8 @@ import '../helper/show_snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  static String id = "LoginPage";
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -93,14 +96,18 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {});
                       try {
                         await loginUser();
-                        showSnackBar(context, "success",);
+                        Navigator.pushNamed(context, ChatPage.id);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           showSnackBar(
-                              context, "No user found for that email.",);
+                            context,
+                            "No user found for that email.",
+                          );
                         } else if (e.code == 'wrong-password') {
-                          showSnackBar(context,
-                              "Wrong password provided for that user.",);
+                          showSnackBar(
+                            context,
+                            "Wrong password provided for that user.",
+                          );
                         }
                       } catch (e) {
                         showSnackBar(context, "there was an error");
