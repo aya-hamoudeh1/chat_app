@@ -9,6 +9,8 @@ class ChatPage extends StatelessWidget {
 
   static String id = "ChatPage";
 
+  final _controller = ScrollController();
+
   CollectionReference messages =
       FirebaseFirestore.instance.collection(kMessagesCollection);
 
@@ -48,6 +50,7 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
                       return ChatBubble(
@@ -66,6 +69,11 @@ class ChatPage extends StatelessWidget {
                         kCreatedAt: DateTime.now(),
                       });
                       controller.clear();
+                      _controller.animateTo(
+                        _controller.position.maxScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn,
+                      );
                     },
                     decoration: InputDecoration(
                       hintText: "Send Message",
