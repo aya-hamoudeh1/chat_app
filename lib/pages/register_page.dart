@@ -80,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 10,
                 ),
                 CustomTextFormField(
+                  obscureText: true,
                   onChange: (p0) {
                     password = p0;
                   },
