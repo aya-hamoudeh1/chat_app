@@ -11,15 +11,20 @@ class ChatPage extends StatelessWidget {
 
   final _controller = ScrollController();
 
-  CollectionReference messages =
+  final CollectionReference messages =
       FirebaseFirestore.instance.collection(kMessagesCollection);
 
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy(kCreatedAt).snapshots(),
+      stream: messages
+          .orderBy(
+            kCreatedAt,
+            descending: true,
+          )
+          .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -50,6 +55,7 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                    reverse: true,
                     controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
@@ -70,8 +76,8 @@ class ChatPage extends StatelessWidget {
                       });
                       controller.clear();
                       _controller.animateTo(
-                        _controller.position.maxScrollExtent,
-                        duration: const Duration(seconds: 1),
+                        0,
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.easeIn,
                       );
                     },
