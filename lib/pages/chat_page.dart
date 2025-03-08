@@ -60,9 +60,13 @@ class ChatPage extends StatelessWidget {
                     controller: _controller,
                     itemCount: messagesList.length,
                     itemBuilder: (context, index) {
-                      return ChatBubble(
-                        messageModel: messagesList[index],
-                      );
+                      return messagesList[index].id == email
+                          ? ChatBubble(
+                              messageModel: messagesList[index],
+                            )
+                          : ChatBubbleForFriend(
+                              messageModel: messagesList[index],
+                            );
                     },
                   ),
                 ),
